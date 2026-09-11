@@ -2,13 +2,13 @@
 
 {
   # ============================================
-  # ЗАГРУЗЧИК
+  # BOOT
   # ============================================
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # ============================================
-  # ДИСКИ (2 раздела: sda1 - EFI, sda2 - BTRFS)
+  # Filesystem
   # ============================================
   fileSystems."/boot" = {
     device = "/dev/sda1";
@@ -35,14 +35,14 @@
   };
 
   # ============================================
-  # СЕТЬ
+  # Network
   # ============================================
   networking.hostName = "Thinkpad"; # поменяй на своё
   networking.networkmanager.enable = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # ============================================
-  # ПОЛЬЗОВАТЕЛЬ
+  # User
   # ============================================
   users.users.dmitrj = {
     isNormalUser = true;
@@ -60,7 +60,7 @@
   ];
 
   # ============================================
-  # ЛОГИН МЕНЕДЖЕР
+  # Login_manager
   # ============================================
   services.displayManager.ly.enable = true;
 
@@ -85,7 +85,7 @@
   };
 
   # ============================================
-  # ГРАФИКА
+  # Graph
   # ============================================
   hardware.opengl = {
     enable = true;
@@ -94,7 +94,7 @@
   hardware.enableRedistributableFirmware = true;
 
   # ============================================
-  # ЗВУК (PipeWire)
+  # Sound (PipeWire)
   # ============================================
   services.pipewire = {
     enable = true;
@@ -105,7 +105,7 @@
   security.rtkit.enable = true;
 
   # ============================================
-  # ПАКЕТЫ
+  # Packages
   # ============================================
   environment.systemPackages = with pkgs; [
     # Системные
@@ -132,27 +132,20 @@
   ];
 
   # ============================================
-  # МОИ КОНФИГИ (копируются из /etc/nixos/dotfiles/)
-  # ============================================
-  environment.etc."xdg/wayland/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-  environment.etc."xdg/wayland/waybar/config".source = ./dotfiles/waybar/config;
-  environment.etc."xdg/wayland/waybar/style.css".source = ./dotfiles/waybar/style.css;
-
-  # ============================================
-  # NIX НАСТРОЙКИ
+  # NIX setings
   # ============================================
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
 
   # ============================================
-  # ВРЕМЯ
+  # Time
   # ============================================
   time.timeZone = "Europe/Moscow";
   services.timesyncd.enable = true;
 
 
   # ============================================
-  # ВЕРСИЯ
+  # Version
   # ============================================
   system.stateVersion = "24.11";
 }
