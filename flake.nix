@@ -2,7 +2,7 @@
   description = "ThinkPad NixOS with Hyprland and Home Manager";
 
   inputs = {
-    # Основной репозиторий пакетов (unstable)
+    # Main pool pkgs (unstable)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home Manager
@@ -16,10 +16,10 @@
     nixosConfigurations.thinkpad = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        # Подключаем системный конфиг
+
         ./configuration.nix
 
-        # Подключаем home-manager как модуль
+        # Connect home-manager how module
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
